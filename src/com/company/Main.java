@@ -49,19 +49,50 @@ public class Main {
                 })
                 .collect(Collectors.toCollection(HashSet::new));
                 return suits.size() == 1;
-
     }
+
+    static boolean isFourOfAKind (HashSet<Card> hand){
+        HashSet<Card.Rank> ranks = hand.stream()
+                .map(card -> {
+                    return card.rank;
+                })
+                .collect(Collectors.toCollection(HashSet::new));
+        return ranks.size() == 1;
+    }
+
+    static boolean isTwoPair (HashSet<Card> hand){
+        HashSet<Card.Rank> ranks = hand.stream()
+                .map(card ->{
+                    return card.rank;
+                })
+                .collect(Collectors.toCollection(HashSet::new)); //get the ranks of the cards
+        return ranks.size() == 2; // this will work for 2 pair actually...
+    }
+
+
+
+
 
     public static void main(String[] args) {
         long beginTime = System.currentTimeMillis();
         Card aceOfSpades = new Card(Card.Suit.SPADES, Card.Rank.ACE);
 
         HashSet<Card> deck = createDeck();
+        HashSet<Card> deck2 = createDeck();
+        HashSet<Card> deck3 = createDeck();
         //System.out.println(deck.size());
         //System.out.println(deck.contains(aceOfSpades));
         HashSet<HashSet<Card>> hands = createHands(deck);
+        HashSet<HashSet<Card>> hands2 = createHands(deck2);
+        HashSet<HashSet<Card>> hands3 = createHands(deck3);
         hands = hands.stream().filter(Main::isFlush).collect(Collectors.toCollection(HashSet::new));
+        hands2 = hands2.stream().filter(Main::isFourOfAKind).collect(Collectors.toCollection(HashSet::new));
+        hands3 = hands3.stream().filter(Main::isTwoPair).collect(Collectors.toCollection(HashSet::new));
         System.out.println(hands.size());
+        System.out.println(hands2.size());
+        System.out.println(hands3.size());
+
+        System.out.println(Card.Suit.CLUBS.ordinal());
         long endTime = System.currentTimeMillis();
         System.out.println(String.format("Elapsed time %d millsecs", endTime-beginTime));
     }
