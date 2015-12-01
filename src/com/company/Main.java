@@ -59,6 +59,16 @@ public class Main {
                 .collect(Collectors.toCollection(HashSet::new));
         return ranks.size() == 1;
     }
+ /*   static boolean isThreeOfAKind (HashSet<Card> hand) {
+        HashSet<Card.Rank> ranks = hand.stream()
+                .map(card -> {
+                    return card.rank;
+                })
+                .collect(Collectors.toCollection(HashSet::new)); //ranks is a hashset of cards based on rank
+
+
+    } */
+
 
     static boolean isTwoPair (HashSet<Card> hand){
         HashSet<Card.Rank> ranks = hand.stream()
@@ -66,7 +76,25 @@ public class Main {
                     return card.rank;
                 })
                 .collect(Collectors.toCollection(HashSet::new)); //get the ranks of the cards
-        return ranks.size() == 2; // this will work for 2 pair actually...
+
+        return ranks.size() == 2; // this will work for 2 pair and 3 of a kinds...simultaenously is not good example
+    }
+
+
+    static boolean isStraight (HashSet<Card> hand){
+        HashSet<Card.Rank> ranks = hand.stream()
+                .map(card ->{
+                    return card.rank;
+                })
+                .collect(Collectors.toCollection(HashSet::new));//get the ranks of the cards
+        HashSet<Card.Rank> sortedRanks = new HashSet<>();
+        //need to sort the cards via rank and check to makesure they're in order
+
+
+        return true;
+    }
+    static HashSet<Card> straightCheck (HashSet<Card> hand){
+
     }
 
 
