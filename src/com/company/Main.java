@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.stream.Collectors;
@@ -81,21 +82,23 @@ public class Main {
     }
 
 
-    static boolean isStraight (HashSet<Card> hand){
-        HashSet<Card.Rank> ranks = hand.stream()
+    static boolean isStraight (ArrayList<Card> hand){
+        ArrayList<Integer> ranks = hand.stream()
                 .map(card ->{
-                    return card.rank;
+                    return card.rank.ordinal();
                 })
-                .collect(Collectors.toCollection(HashSet::new));//get the ranks of the cards
-        HashSet<Card.Rank> sortedRanks = new HashSet<>();
+                .sorted()
+                .collect(Collectors.toCollection(ArrayList::new));//get the ranks of the cards
+       // HashSet<Card.Rank> sortedRanks = new HashSet<>();
         //need to sort the cards via rank and check to makesure they're in order
-
-
-        return true;
+        ArrayList<Integer> rankCheck = new ArrayList<>();
+        int i = ranks.get(0);
+        for (int r = 0; r < ranks.size(); r++){
+            rankCheck.add(i + r);
+        }
+        return ranks.equals(rankCheck);
     }
-    static HashSet<Card> straightCheck (HashSet<Card> hand){
 
-    }
 
 
 
